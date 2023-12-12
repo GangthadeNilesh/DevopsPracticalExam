@@ -1,0 +1,722 @@
+sudo] password for cse: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.34-0ubuntu0.22.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases
+    -> show databases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'show databases' at line 2
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| Practicle2         |
+| SM                 |
+| SSM                |
+| Shraddha           |
+| T3_Batch           |
+| ajit               |
+| c_tab              |
+| data               |
+| data1              |
+| information_schema |
+| join_operations    |
+| mydata             |
+| mysql              |
+| performance_schema |
+| shraddha           |
+| shri               |
+| skncse             |
+| sm                 |
+| sys                |
++--------------------+
+19 rows in set (2.95 sec)
+
+mysql> create table employ(emp_id int,emp_name varchar(30),emp_dep varchar(10),salary int);
+ERROR 1046 (3D000): No database selected
+mysql> create table employ(emp_id int,emp_name varchar(30),emp_dep varchar(10),salary int)
+    -> 
+    -> mysql
+    -> 
+    -> show databases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql
+
+show databases' at line 3
+mysql> create database ex6;
+Query OK, 1 row affected (0.34 sec)
+
+mysql> use database;
+ERROR 1049 (42000): Unknown database 'database'
+mysql> use database ex6;
+ERROR 1049 (42000): Unknown database 'database'
+mysql> use ex6;
+Database changed
+mysql> create table employ(emp_id int,emp_name varchar(30),emp_dep varchar(10),salary int); 
+Query OK, 0 rows affected (2.51 sec)
+
+mysql> insert into employ values(1,'murarji','entc',75000);
+Query OK, 1 row affected (0.43 sec)
+
+mysql> insert into employ values(2,'bajaji','mech',75000);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into employ values(3,'hambir','mech',65000);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into employ values(4,'yeshwant','entc',78000);
+Query OK, 1 row affected (0.17 sec)
+
+mysql> insert into employ values(5,'dhanaji','mech',83000);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into employ values(6,'santaji','cse',80000);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into employ values(7,'baji','civil',68000);
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into employ values(8,'jiva','civil',60000);
+Query OK, 1 row affected (0.26 sec)
+
+mysql> insert into employ values(9,'tanaji','cse',82000);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into employ values(10,'yesaji','cse',84000);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select *from employ;
++--------+----------+---------+--------+
+| emp_id | emp_name | emp_dep | salary |
++--------+----------+---------+--------+
+|      1 | murarji  | entc    |  75000 |
+|      2 | bajaji   | mech    |  75000 |
+|      3 | hambir   | mech    |  65000 |
+|      4 | yeshwant | entc    |  78000 |
+|      5 | dhanaji  | mech    |  83000 |
+|      6 | santaji  | cse     |  80000 |
+|      7 | baji     | civil   |  68000 |
+|      8 | jiva     | civil   |  60000 |
+|      9 | tanaji   | cse     |  82000 |
+|     10 | yesaji   | cse     |  84000 |
++--------+----------+---------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select sum(salary) from employ;
++-------------+
+| sum(salary) |
++-------------+
+|      750000 |
++-------------+
+1 row in set (0.03 sec)
+
+mysql> select sum(salary) from employ where emp_dep='cse';
++-------------+
+| sum(salary) |
++-------------+
+|      246000 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select sum(salary) from employ group by emp_dep;
++-------------+
+| sum(salary) |
++-------------+
+|      153000 |
+|      223000 |
+|      246000 |
+|      128000 |
++-------------+
+4 rows in set (0.22 sec)
+
+mysql> select sum(salary+salary/10) from employ;
++-----------------------+
+| sum(salary+salary/10) |
++-----------------------+
+|           825000.0000 |
++-----------------------+
+1 row in set (0.02 sec)
+
+mysql> select count('emp_dep')from employ;
++------------------+
+| count('emp_dep') |
++------------------+
+|               10 |
++------------------+
+1 row in set (0.10 sec)
+
+mysql> select count('emp_name')from employ;
++-------------------+
+| count('emp_name') |
++-------------------+
+|                10 |
++-------------------+
+1 row in set (0.17 sec)
+
+mysql> select count(*)from employ where emp_dep='cse';
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select emp_dep,count(emp_dep)from employ goupby emp_dep;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'emp_dep' at line 1
+mysql> select emp_dep ,count(emp_dep)from employ goup by emp_dep;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'by emp_dep' at line 1
+mysql> select emp_dep ,count(emp_dep) from employ goup by emp_dep;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'by emp_dep' at line 1
+mysql> select emp_dep ,count(emp_dep) from employ group by emp_dep;
++---------+----------------+
+| emp_dep | count(emp_dep) |
++---------+----------------+
+| entc    |              2 |
+| mech    |              3 |
+| cse     |              3 |
+| civil   |              2 |
++---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select average salary from employ;
+ERROR 1054 (42S22): Unknown column 'average' in 'field list'
+mysql> select avg(salary) from employ;
++-------------+
+| avg(salary) |
++-------------+
+|  75000.0000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) from employ where emp_dep='mech';
++-------------+
+| avg(salary) |
++-------------+
+|  74333.3333 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) from employ where emp_dep='cse';
++-------------+
+| avg(salary) |
++-------------+
+|  82000.0000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select emp_name ,salary from employ where emp_name=salary;
+Empty set, 10 warnings (0.03 sec)
+
+mysql> select emp_name , salary from employ where salary>avg(salary) (select avg
+(salary) from employ where emp_dep='cse');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use nmysql> select emp_name , salary from employ where salary>avg(salary) (select avg(salary) from employ where emp_dep='cse');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(select avg(salary) from employ where emp_dep='cse')' at line 1
+mysql> select emp_name , salary from employ where emp_dep='cse' and salary>(select avg(salary) from employ where emp_dep='cse');
++----------+--------+
+| emp_name | salary |
++----------+--------+
+| yesaji   |  84000 |
++----------+--------+
+1 row in set (0.03 sec)
+
+mysql> select min(salary) from employ;
++-------------+
+| min(salary) |
++-------------+
+|       60000 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select min(salary) from employ where emp_dep='cse';
++-------------+
+| min(salary) |
++-------------+
+|       80000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select min(salary) from employ group by emp_dep;
++-------------+
+| min(salary) |
++-------------+
+|       75000 |
+|       65000 |
+|       80000 |
+|       60000 |
++-------------+
+4 rows in set (0.00 sec)
+
+mysql> select emp_dep , min(salary) from employ group by emp_dep;
++---------+-------------+
+| emp_dep | min(salary) |
++---------+-------------+
+| entc    |       75000 |
+| mech    |       65000 |
+| cse     |       80000 |
+| civil   |       60000 |
++---------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select emp_name and emp_dep , min(salary) from employ group by emp_dep;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'ex6.employ.emp_name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select emp_name , min(salary) from employ group by emp_dep;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'ex6.employ.emp_name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select emp_name , min(salary) from employ group by emp_dep;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'ex6.employ.emp_name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select emp_dep , min(salary) from employ group by emp_dep;
++---------+-------------+
+| emp_dep | min(salary) |
++---------+-------------+
+| entc    |       75000 |
+| mech    |       65000 |
+| cse     |       80000 |
+| civil   |       60000 |
++---------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select emp_dep and emp_name , min(salary) from employ group by emp_dep and emp_name;
++----------------------+-------------+
+| emp_dep and emp_name | min(salary) |
++----------------------+-------------+
+|                    0 |       60000 |
++----------------------+-------------+
+1 row in set, 11 warnings (0.00 sec)
+
+mysql> select emp_name,emp_dep ,salary where min(salary) from employ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from employ' at line 1
+mysql> select emp_name,emp_dep ,salary where select min(salary) from employ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select min(salary) from employ' at line 1
+mysql> select emp_name,emp_dep , salary where select min(salary) from employ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select min(salary) from employ' at line 1
+mysql> select emp_name,emp_dep , salary from employ where select min(salary) from employ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select min(salary) from employ' at line 1
+mysql> select emp_name , emp_dep , salary from employ where (select min(salary) from employ);
++----------+---------+--------+
+| emp_name | emp_dep | salary |
++----------+---------+--------+
+| murarji  | entc    |  75000 |
+| bajaji   | mech    |  75000 |
+| hambir   | mech    |  65000 |
+| yeshwant | entc    |  78000 |
+| dhanaji  | mech    |  83000 |
+| santaji  | cse     |  80000 |
+| baji     | civil   |  68000 |
+| jiva     | civil   |  60000 |
+| tanaji   | cse     |  82000 |
+| yesaji   | cse     |  84000 |
++----------+---------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select emp_name , emp_dep , salary from employ where salary=(select min(salary) from employ);
++----------+---------+--------+
+| emp_name | emp_dep | salary |
++----------+---------+--------+
+| jiva     | civil   |  60000 |
++----------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> select max(salary) from employ;
++-------------+
+| max(salary) |
++-------------+
+|       84000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select emp_name from employ where salary=(select max(salary) from employ);
++----------+
+| emp_name |
++----------+
+| yesaji   |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select emp_name,salary from employ where salary=(select max(salary) from employ);
++----------+--------+
+| emp_name | salary |
++----------+--------+
+| yesaji   |  84000 |
++----------+--------+
+1 row in set (0.00 sec)
+
+mysql> select max(salary) from employ where emp_dep='cse';
++-------------+
+| max(salary) |
++-------------+
+|       84000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select emp_dep,max(salary) from employ group by emp_dep;
++---------+-------------+
+| emp_dep | max(salary) |
++---------+-------------+
+| entc    |       78000 |
+| mech    |       83000 |
+| cse     |       84000 |
+| civil   |       68000 |
++---------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select *from employ from salary where salary in;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from salary where salary in' at line 1
+mysql> select emp_dep,max(salary) from employ group by emp_dep;
++---------+-------------+
+| emp_dep | max(salary) |
++---------+-------------+
+| entc    |       78000 |
+| mech    |       83000 |
+| cse     |       84000 |
+| civil   |       68000 |
++---------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select power of 4,2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'of 4,2' at line 1
+mysql> select power(4,2);
++------------+
+| power(4,2) |
++------------+
+|         16 |
++------------+
+1 row in set (0.02 sec)
+
+mysql> select sqrt(system);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'system)' at line 1
+mysql> select sqrt(15);
++-------------------+
+| sqrt(15)          |
++-------------------+
+| 3.872983346207417 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select sysdate from dual;
+ERROR 1054 (42S22): Unknown column 'sysdate' in 'field list'
+mysql> select concat('orange','crty')from dual;
++-------------------------+
+| concat('orange','crty') |
++-------------------------+
+| orangecrty              |
++-------------------------+
+1 row in set (0.02 sec)
+
+mysql> select lpad('orange',13,'*');
++-----------------------+
+| lpad('orange',13,'*') |
++-----------------------+
+| *******orange         |
++-----------------------+
+1 row in set (0.01 sec)
+
+mysql> select lower('DBMS')from dual;
++---------------+
+| lower('DBMS') |
++---------------+
+| dbms          |
++---------------+
+1 row in set (0.01 sec)
+
+mysql> select upper('dbms')from dual;
++---------------+
+| upper('dbms') |
++---------------+
+| DBMS          |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select substr('abcdasdb',3,4)from dual;
++------------------------+
+| substr('abcdasdb',3,4) |
++------------------------+
+| cdas                   |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date(2023-4-10);
++-----------------+
+| date(2023-4-10) |
++-----------------+
+| NULL            |
++-----------------+
+1 row in set, 1 warning (0.02 sec)
+
+mysql> select date(2023-10-10);
++------------------+
+| date(2023-10-10) |
++------------------+
+| NULL             |
++------------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select date(2023-10-4);
++-----------------+
+| date(2023-10-4) |
++-----------------+
+| NULL            |
++-----------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select datediff('2023-10-04','2022-03-04');
++-------------------------------------+
+| datediff('2023-10-04','2022-03-04') |
++-------------------------------------+
+|                                 579 |
++-------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select datediff('2003-10-04','2023-10-04');
++-------------------------------------+
+| datediff('2003-10-04','2023-10-04') |
++-------------------------------------+
+|                               -7305 |
++-------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select(current_time);
++----------------+
+| (current_time) |
++----------------+
+| 02:10:27       |
++----------------+
+1 row in set (0.04 sec)
+
+mysql> select current_time();
++----------------+
+| current_time() |
++----------------+
+| 02:11:12       |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select current_time(spam);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'spam)' at line 1
+mysql> select current_time(span);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'span)' at line 1
+mysql> select current_timestamp();
++---------------------+
+| current_timestamp() |
++---------------------+
+| 2023-10-04 02:11:55 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select month('2023-10-04');
++---------------------+
+| month('2023-10-04') |
++---------------------+
+|                  10 |
++---------------------+
+1 row in set (0.02 sec)
+
+mysql> select day('2023-10-04');
++-------------------+
+| day('2023-10-04') |
++-------------------+
+|                 4 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select year('2023-10-04');
++--------------------+
+| year('2023-10-04') |
++--------------------+
+|               2023 |
++--------------------+
+1 row in set (0.02 sec)
+
+mysql> weak('2023-10-04');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'weak('2023-10-04')' at line 1
+mysql> week('2023-10-04');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'week('2023-10-04')' at line 1
+mysql> select week('2023-10-04');
++--------------------+
+| week('2023-10-04') |
++--------------------+
+|                 40 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select hour('12.30.35');
++------------------+
+| hour('12.30.35') |
++------------------+
+|                0 |
++------------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select hour('2.30.35');
++-----------------+
+| hour('2.30.35') |
++-----------------+
+|               0 |
++-----------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select hour('2-30-35');
++-----------------+
+| hour('2-30-35') |
++-----------------+
+|               0 |
++-----------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select hour(current timestamp);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'timestamp)' at line 1
+mysql> select hour(current_timestamp);
++-------------------------+
+| hour(current_timestamp) |
++-------------------------+
+|                       2 |
++-------------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employ where emp_dep like 'c%';
++--------+----------+---------+--------+
+| emp_id | emp_name | emp_dep | salary |
++--------+----------+---------+--------+
+|      6 | santaji  | cse     |  80000 |
+|      7 | baji     | civil   |  68000 |
+|      8 | jiva     | civil   |  60000 |
+|      9 | tanaji   | cse     |  82000 |
+|     10 | yesaji   | cse     |  84000 |
++--------+----------+---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select *from employ where emp_dep like 'c%';
++--------+----------+---------+--------+
+| emp_id | emp_name | emp_dep | salary |
++--------+----------+---------+--------+
+|      6 | santaji  | cse     |  80000 |
+|      7 | baji     | civil   |  68000 |
+|      8 | jiva     | civil   |  60000 |
+|      9 | tanaji   | cse     |  82000 |
+|     10 | yesaji   | cse     |  84000 |
++--------+----------+---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select *from employ where emp_dep like 'm%';
++--------+----------+---------+--------+
+| emp_id | emp_name | emp_dep | salary |
++--------+----------+---------+--------+
+|      2 | bajaji   | mech    |  75000 |
+|      3 | hambir   | mech    |  65000 |
+|      5 | dhanaji  | mech    |  83000 |
++--------+----------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select *from employ where emp_name like '%ji';
++--------+----------+---------+--------+
+| emp_id | emp_name | emp_dep | salary |
++--------+----------+---------+--------+
+|      1 | murarji  | entc    |  75000 |
+|      2 | bajaji   | mech    |  75000 |
+|      5 | dhanaji  | mech    |  83000 |
+|      6 | santaji  | cse     |  80000 |
+|      7 | baji     | civil   |  68000 |
+|      9 | tanaji   | cse     |  82000 |
+|     10 | yesaji   | cse     |  84000 |
++--------+----------+---------+--------+
+7 rows in set (0.02 sec)
+
+mysql> select *from employ where emp_name like '-a%';
+Empty set (0.00 sec)
+
+mysql> select *from employ where emp_name like '_a%';
++--------+----------+---------+--------+
+| emp_id | emp_name | emp_dep | salary |
++--------+----------+---------+--------+
+|      2 | bajaji   | mech    |  75000 |
+|      3 | hambir   | mech    |  65000 |
+|      6 | santaji  | cse     |  80000 |
+|      7 | baji     | civil   |  68000 |
+|      9 | tanaji   | cse     |  82000 |
++--------+----------+---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select *from employ where emp_name like '____';
++--------+----------+---------+--------+
+| emp_id | emp_name | emp_dep | salary |
++--------+----------+---------+--------+
+|      7 | baji     | civil   |  68000 |
+|      8 | jiva     | civil   |  60000 |
++--------+----------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select *from employ where emp_name like '%_i';
++--------+----------+---------+--------+
+| emp_id | emp_name | emp_dep | salary |
++--------+----------+---------+--------+
+|      1 | murarji  | entc    |  75000 |
+|      2 | bajaji   | mech    |  75000 |
+|      5 | dhanaji  | mech    |  83000 |
+|      6 | santaji  | cse     |  80000 |
+|      7 | baji     | civil   |  68000 |
+|      9 | tanaji   | cse     |  82000 |
+|     10 | yesaji   | cse     |  84000 |
++--------+----------+---------+--------+
+7 rows in set (0.00 sec)
+
+mysql> select *from employ where emp_name like '%n___';
++--------+----------+---------+--------+
+| emp_id | emp_name | emp_dep | salary |
++--------+----------+---------+--------+
+|      5 | dhanaji  | mech    |  83000 |
+|      9 | tanaji   | cse     |  82000 |
++--------+----------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employ order by salary;
++--------+----------+---------+--------+
+| emp_id | emp_name | emp_dep | salary |
++--------+----------+---------+--------+
+|      8 | jiva     | civil   |  60000 |
+|      3 | hambir   | mech    |  65000 |
+|      7 | baji     | civil   |  68000 |
+|      1 | murarji  | entc    |  75000 |
+|      2 | bajaji   | mech    |  75000 |
+|      4 | yeshwant | entc    |  78000 |
+|      6 | santaji  | cse     |  80000 |
+|      9 | tanaji   | cse     |  82000 |
+|      5 | dhanaji  | mech    |  83000 |
+|     10 | yesaji   | cse     |  84000 |
++--------+----------+---------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employ order by salary dese;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dese' at line 1
+mysql> select * from employ order by salary desc;
++--------+----------+---------+--------+
+| emp_id | emp_name | emp_dep | salary |
++--------+----------+---------+--------+
+|     10 | yesaji   | cse     |  84000 |
+|      5 | dhanaji  | mech    |  83000 |
+|      9 | tanaji   | cse     |  82000 |
+|      6 | santaji  | cse     |  80000 |
+|      4 | yeshwant | entc    |  78000 |
+|      1 | murarji  | entc    |  75000 |
+|      2 | bajaji   | mech    |  75000 |
+|      7 | baji     | civil   |  68000 |
+|      3 | hambir   | mech    |  65000 |
+|      8 | jiva     | civil   |  60000 |
++--------+----------+---------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select top 3 *from employ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '3 *from employ' at line 1
+mysql> select top3 *from employ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from employ' at line 1
+mysql> select top3 * from employ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from employ' at line 1
+mysql> select top 3 * from employ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '3 * from employ' at line 1
+mysql> 
+
+
